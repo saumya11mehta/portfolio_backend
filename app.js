@@ -4,10 +4,18 @@ let app      = express();
 let db = require('./modelFunctions');
 let database = require('./config/database');
 require('dotenv').config();
+const cors = require('cors');
+const corsOptions ={
+    origin:process.env.CORSURLS, 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
 
 
 // pull information from HTML POST (express4)
 let port = process.env.PORT || 8000;
+
+app.use(cors(corsOptions));
 
 app.get('/api/user', async function(req, res) {
 	id = process.env.USER_ID
